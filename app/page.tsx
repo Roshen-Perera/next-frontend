@@ -4,7 +4,7 @@ import Image from "next/image";
 const response = await fetch(
   `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/articles?populate=*`,
 );
-const articles = await response.json();\
+const articles = await response.json();
 
 const formatDate = (date: Date) => {
   const options: Intl.DateTimeFormatOptions = {
