@@ -3,6 +3,14 @@
 import { use } from "react";
 import Image from "next/image";
 
+const getArticles = async () => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/articles?populate=*`,
+  );
+  const articles = await response.json();
+  return articles;
+};
+
 export default function Articles({ articles }: { articles: Promise<any> }) {
   const allArticles = use(articles);
   const formatDate = (date: Date) => {
@@ -25,15 +33,22 @@ export default function Articles({ articles }: { articles: Promise<any> }) {
             >
               <Image
                 className="w-full h-48 object-cover"
-                src={process.env.NEXT_PUBLIC_STRAPI_URL + article.attributes.cover.url}
+                src={
+                  process.env.NEXT_PUBLIC_STRAPI_URL +
+                  article.attributes.cover.url
+                }
                 alt={article.attributes.title}
                 width={180}
                 height={38}
                 priority
               />
               <div className="p-4">
-                <h3 className="text-lg font-bold mb-2">{article.attributes.title}</h3>
-                <p className="text-gray-600 mb-4">{article.attributes.content}</p>
+                <h3 className="text-lg font-bold mb-2">
+                  {article.attributes.title}
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  {article.attributes.content}
+                </p>
                 <p className="text-sm text-gray-500">
                   Published: {formatDate(article.attributes.publishedAt)}
                 </p>
