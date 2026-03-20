@@ -9,7 +9,7 @@ const getArticles = async () => {
   return articles;
 };
 
-const page = () => {
+const AllArticles = () => {
   const articles = getArticles();
   return (
     <div className="p-6">
@@ -23,4 +23,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default AllArticles;
